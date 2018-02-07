@@ -13,13 +13,6 @@ namespace MicroService4Net.Ninject
 {
     public class MicroServiceNinject : MicroService
     {
-        #region Events
-
-        public new event Action OnServiceStarted;
-        public new event Action OnServiceStopped;
-
-        #endregion
-
         private ILogger m_logger;
 
         public MicroServiceNinject(int port = 8080, string serviceDisplayName = null, string serviceName = null,
@@ -54,7 +47,7 @@ namespace MicroService4Net.Ninject
             _selfHostServer.Connect(configure, useCors);
             this.m_logger?.Debug($"Service {this.ServiceDisplayName} started on {this.IpAddress}:{this.Port}");
 
-            this.OnServiceStarted?.Invoke();
+            base.OnServiceStarted();
         }
     }
 }

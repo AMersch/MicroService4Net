@@ -11,8 +11,8 @@ namespace MicroService4Net
     {
         #region Events
 
-        public event Action OnServiceStarted;
-        public event Action OnServiceStopped;
+        public event Action ServiceStarted;
+        public event Action ServiceStopped;
 
         #endregion
 
@@ -39,7 +39,7 @@ namespace MicroService4Net
 
         #region C'tor
 
-        public MicroService( int port = 8080, string serviceDisplayName = null, string serviceName = null,
+        public MicroService(int port = 8080, string serviceDisplayName = null, string serviceName = null,
             Action<HttpConfiguration> configure = null, bool useCors = true)
         {
             InitMicroService("*", port, serviceDisplayName, serviceName, configure, useCors);
@@ -135,7 +135,7 @@ namespace MicroService4Net
         private void Stop()
         {
             _selfHostServer.Dispose();
-            OnServiceStopped?.Invoke();
+            OnServiceStopped();
         }
 
         protected virtual void Start(Action<HttpConfiguration> configure, bool useCors)
@@ -144,9 +144,22 @@ namespace MicroService4Net
 
             _selfHostServer.Connect(configure, useCors);
             Console.WriteLine($"Service {_serviceDisplayName} started on {_ipAddress}:{_port}");
-            OnServiceStarted?.Invoke();
+            OnServiceStarted();
         }
 
         #endregion
+
+        #region Event Invoker
+        protected virtual void OnServiceStarted()
+        {
+            ServiceStarted?.Invoke();
+        }
+
+        protected virtual void OnServiceStopped()
+        {
+            ServiceStopped?.Invoke();
+        }
+        #endregion
+
     }
 }
