@@ -10,6 +10,8 @@ using Owin;
 using Ninject.Extensions.Logging;
 
 using MicroService4Net.Network;
+using Ninject.Web.Common.OwinHost;
+using Ninject.Web.WebApi.OwinHost;
 
 namespace MicroService4Net.Ninject.Network
 {
@@ -68,7 +70,7 @@ namespace MicroService4Net.Ninject.Network
             if (useCors)
                 appBuilder.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
-            appBuilder.Use(CompositionRoot.Kernel).Use(config);
+            appBuilder.UseNinjectMiddleware(() => CompositionRoot.Kernel).UseNinjectWebApi(config);
         }
 
         public async void Dispose()
