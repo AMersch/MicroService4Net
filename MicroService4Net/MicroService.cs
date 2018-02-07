@@ -23,11 +23,19 @@ namespace MicroService4Net
         private int _port;
         private WindowsServiceManager _serviceManager;
         private RegistryManipulator _registryManipulator;
-        private SelfHostServer _selfHostServer;
         private Action<HttpConfiguration> _configure;
         private bool _useCors;
 
+        protected ISelfHostServer _selfHostServer;
+
         #endregion
+
+        #region Properties
+        protected string IpAddress => _ipAddress;
+        protected int Port => _port;
+        protected string ServiceDisplayName => _serviceDisplayName;
+        #endregion
+
 
         #region C'tor
 
@@ -130,7 +138,7 @@ namespace MicroService4Net
             OnServiceStopped?.Invoke();
         }
 
-        private void Start(Action<HttpConfiguration> configure, bool useCors)
+        protected virtual void Start(Action<HttpConfiguration> configure, bool useCors)
         {
             _selfHostServer = new SelfHostServer(_ipAddress, _port, true);
 

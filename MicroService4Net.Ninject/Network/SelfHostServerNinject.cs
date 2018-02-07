@@ -1,28 +1,35 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 using System.Web.Http;
 using System.Net.Http.Formatting;
+using System.Reflection;
+using System.Linq;
 
 using Microsoft.Owin.Hosting;
 using Owin;
 
-namespace MicroService4Net.Network
+using Ninject.Extensions.Logging;
+
+using MicroService4Net.Network;
+
+namespace MicroService4Net.Ninject.Network
 {
-    public class SelfHostServer : IDisposable, ISelfHostServer
+    public class SelfHostServerNinject : ISelfHostServer
     {
         #region Fields
 
-        private readonly StartOptions _options;
-        private IDisposable _serverDisposable;
+        private readonly StartOptions m_options;
+        private IDisposable m_serverDisposable;
+
+        private ILogger m_logger;
 
         #endregion
 
         #region C'tor
 
-        public SelfHostServer(string ipaddress, int port, bool callControllersStaticConstractorsOnInit)
+        public SelfHostServerNinject(ILogger logger, string ipaddress, int port, bool callControllersStaticConstractorsOnInit)
         {
-            _options = new StartOptions($"http://{ipaddress}:{port}");
+            this.m_logger = logger;
+            this.m_options = new StartOptions($"http://{ipaddress}:{port}");
 
             if (callControllersStaticConstractorsOnInit)
                 CallControllersStaticConstractors();
@@ -34,13 +41,15 @@ namespace MicroService4Net.Network
 
         public void Connect(Action<HttpConfiguration> configure, bool useCors)
         {
+            this.m_logger?.Info("Connect");
+
             try
             {
-                _serverDisposable = WebApp.Start(_options, appBuilder => BuildApp(appBuilder, configure, useCors));
+                m_serverDisposable = WebApp.Start(this.m_options, appBuilder => BuildApp(appBuilder, configure, useCors));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                this.m_logger?.ErrorException(ex.Message, ex);
             }
         }
 
@@ -59,12 +68,12 @@ namespace MicroService4Net.Network
             if (useCors)
                 appBuilder.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
-            appBuilder.UseWebApi(config);
+            appBuilder.Use(CompositionRoot.Kernel).Use(config);
         }
 
-        public void Dispose()
+        public async void Dispose()
         {
-            _serverDisposable.Dispose();
+            m_serverDisposable.Dispose();
         }
 
         #endregion
