@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MicroService4Net")]
-[assembly: AssemblyCopyright("Copyright Code Cleaner© 2016")]
+[assembly: AssemblyCopyright("Copyright Code Cleaner© 2016, Extensions 2018 by Andreas Mersch, idesis GmbH")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,4 +29,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.0.*")]
+[assembly: AssemblyVersion("2.1.*")]

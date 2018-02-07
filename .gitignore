@@ -12,3 +12,5 @@ MicroService4Net.sln.DotSettings.user
 MicroService4Net.Example/MicroService4Net.Example.csproj.user
 MicroService4Net.Example.FromNuget/bin/*
 MicroService4Net.Example.FromNuget/obj/*
+bin
+obj

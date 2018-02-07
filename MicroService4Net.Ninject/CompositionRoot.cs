@@ -13,7 +13,7 @@ namespace MicroService4Net.Ninject
         /// <summary>The ninject kernel.</summary>
         private static IKernel _ninjectKernel;
 
-        public static readonly IKernel Kernel => _ninjectKernel;
+        public static IKernel Kernel => _ninjectKernel;
 
 
         /// <summary>Wires the given module. Creates a new kernel, if no kernel exists.</summary>
