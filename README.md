@@ -6,6 +6,11 @@ Additional Requirements
 -----------------------
 * Ninject
 * Ninject.Extensions.Logging
+* Ninject.Extensions.NamedScope
+* Ninject.Web.Common
+* Ninject.Web.Common.OwinHost
+* Ninject.Web.WebApi
+* Ninject.Web.WebApi.OwinHost
 
 Repository
 ----------
@@ -13,6 +18,41 @@ This project can be found at https://github.com/AMersch/MicroService4Net
 
 Examples
 --------
+
+* Program.cs
+```C#
+class Program
+{
+    static void Main(string[] args)
+    {
+        var microService = new MicroServiceNinject();
+        microService.Run(args);
+    }
+}
+```
+
+* ExampleController.cs
+```C#
+[RoutePrefix("api/v1/Example")]
+public class ExampleController : ApiController
+{
+    ILogger m_logger;
+
+    public ExampleController(ILogger logger)
+        : base()
+    {
+        this.m_logger = logger;
+        this.m_logger?.Debug("Ctor");
+    }
+
+    [Route("")]
+    public string GetExample()
+    {
+        this.m_logger?.Debug("GetExample");
+        return "Example";
+    }
+}
+```
 
 Credits
 -------
