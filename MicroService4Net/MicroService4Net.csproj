@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="WindowsServiceManager.cs" />
     <Compile Include="Network\ISelfHostServer.cs" />
+    <Compile Include="IMicroService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

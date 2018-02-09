@@ -9,11 +9,12 @@ using Owin;
 
 using Ninject.Extensions.Logging;
 
-using MicroService4Net.Network;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
+using MicroService4Net.Network;
+using Ninject.Syntax;
 
-namespace MicroService4Net.Ninject.Network
+namespace Ninject.Web.MicroService4Net.Network
 {
     public class SelfHostServerNinject : ISelfHostServer
     {
@@ -23,14 +24,16 @@ namespace MicroService4Net.Ninject.Network
         private IDisposable m_serverDisposable;
 
         private ILogger m_logger;
+        private IResolutionRoot m_resolutionRoot;
 
         #endregion
 
         #region C'tor
 
-        public SelfHostServerNinject(ILogger logger, string ipaddress, int port, bool callControllersStaticConstractorsOnInit)
+        public SelfHostServerNinject(IResolutionRoot resolutionRoot, ILogger logger, string ipaddress, int port, bool callControllersStaticConstractorsOnInit)
         {
             this.m_logger = logger;
+            this.m_resolutionRoot = resolutionRoot;
             this.m_options = new StartOptions($"http://{ipaddress}:{port}");
 
             if (callControllersStaticConstractorsOnInit)
@@ -55,7 +58,7 @@ namespace MicroService4Net.Ninject.Network
             }
         }
 
-        private static void BuildApp(IAppBuilder appBuilder, Action<HttpConfiguration> configure, bool useCors)
+        private void BuildApp(IAppBuilder appBuilder, Action<HttpConfiguration> configure, bool useCors)
         {
             var config = new HttpConfiguration();
 
@@ -70,7 +73,7 @@ namespace MicroService4Net.Ninject.Network
             if (useCors)
                 appBuilder.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
-            appBuilder.UseNinjectMiddleware(() => CompositionRoot.Kernel).UseNinjectWebApi(config);
+            appBuilder.UseNinjectMiddleware(() => (IKernel)this.m_resolutionRoot).UseNinjectWebApi(config);
         }
 
         public async void Dispose()

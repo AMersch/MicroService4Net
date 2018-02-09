@@ -66,17 +66,18 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject.Extensions.Logging">
-      <HintPath>..\packages\Ninject.Extensions.Logging.3.2.3.0\lib\net45-full\Ninject.Extensions.Logging.dll</HintPath>
+      <HintPath>..\packages\Ninject.Extensions.Logging.3.3.0-beta1\lib\net45\Ninject.Extensions.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Common">
-      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Ninject.Web.Common.3.3.0\lib\net45\Ninject.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.WebApi">
-      <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+      <HintPath>..\packages\Ninject.Web.WebApi.3.3.0\lib\net45\Ninject.Web.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -103,9 +104,9 @@
       <Project>{A3CD548B-DB44-4237-90EF-23663145BED9}</Project>
       <Name>MicroService4Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MicroService4Net.Ninject\MicroService4Net.Ninject.csproj">
+    <ProjectReference Include="..\MicroService4Net.Ninject\Ninject.Web.MicroService4Net.csproj">
       <Project>{88A2EA1E-991B-4BDD-B5A5-DEC840F1B5AC}</Project>
-      <Name>MicroService4Net.Ninject</Name>
+      <Name>Ninject.Web.MicroService4Net</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

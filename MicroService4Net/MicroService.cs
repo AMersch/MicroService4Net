@@ -7,7 +7,7 @@ using MicroService4Net.ServiceInternals;
 
 namespace MicroService4Net
 {
-    public class MicroService
+    public class MicroService : IMicroService
     {
         #region Events
 

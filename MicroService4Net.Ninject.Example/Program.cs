@@ -1,4 +1,6 @@
-﻿using MicroService4Net.Ninject;
+﻿using Ninject;
+using Ninject.Extensions.Logging;
+using Ninject.Web.MicroService4Net;
 
 namespace MicroService4Net.Example
 {
@@ -6,8 +8,13 @@ namespace MicroService4Net.Example
     {
         static void Main(string[] args)
         {
-            var microService = new MicroServiceNinject();
-            microService.Run(args);
+            using (IKernel kernel = new StandardKernel())
+            {
+                var microServiceFactory = kernel.Get<IMicroServiceFactory>();
+                var microService = microServiceFactory.Create();
+
+                microService.Run(args);
+            }
         }
     }
 }

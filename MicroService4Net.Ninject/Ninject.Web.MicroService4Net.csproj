@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{88A2EA1E-991B-4BDD-B5A5-DEC840F1B5AC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>MicroService4Net.Ninject</RootNamespace>
-    <AssemblyName>MicroService4Net.Ninject</AssemblyName>
+    <RootNamespace>Ninject.Web.MicroService4Net</RootNamespace>
+    <AssemblyName>Ninject.Web.MicroService4Net</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -75,13 +75,18 @@
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MicroServiceNinject.cs" />
     <Compile Include="Network\SelfHostServerNinject.cs" />
-    <Compile Include="CompositionRoot.cs" />
-    <Compile Include="MicroServiceDIModule.cs" />
+    <Compile Include="MicroServiceModule.cs" />
+    <Compile Include="ISelfHostServerFactory.cs" />
+    <Compile Include="IMicroServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

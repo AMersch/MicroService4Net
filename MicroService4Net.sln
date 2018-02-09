@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService4Net.Example", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService4Net.Example.FromNuget", "MicroService4Net.Example.FromNuget\MicroService4Net.Example.FromNuget.csproj", "{3B12467F-4793-45A5-B3AA-7EB2EACFD15D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService4Net.Ninject", "MicroService4Net.Ninject\MicroService4Net.Ninject.csproj", "{88A2EA1E-991B-4BDD-B5A5-DEC840F1B5AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Web.MicroService4Net", "MicroService4Net.Ninject\Ninject.Web.MicroService4Net.csproj", "{88A2EA1E-991B-4BDD-B5A5-DEC840F1B5AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService4Net.Ninject.Example", "MicroService4Net.Ninject.Example\MicroService4Net.Ninject.Example.csproj", "{EE34D216-6B2C-4573-8F38-39D92CC7DF8F}"
 EndProject
