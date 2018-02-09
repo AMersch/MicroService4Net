@@ -48,14 +48,6 @@ namespace Ninject.Web.MicroService4Net
                 this.m_kernel = context.Kernel;
             }
 
-            public ISelfHostServer Create(string ipaddress, int port, bool callControllersStaticConstractorsOnInit)
-            {
-                var selfHostServer = this.m_kernel.Get<ISelfHostServer>(new ConstructorArgument("ipaddress", ipaddress),
-                                                                        new ConstructorArgument("port", port),
-                                                                        new ConstructorArgument("callControllersStaticConstractorsOnInit", callControllersStaticConstractorsOnInit));
-                return selfHostServer;
-            }
-
             public IMicroService Create(int port = 8080, string serviceDisplayName = null, string serviceName = null, Action<HttpConfiguration> configure = null, bool useCors = true)
             {
                 var microService = this.m_kernel.Get<IMicroService>(new ConstructorArgument("port", port),

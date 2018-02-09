@@ -27,7 +27,7 @@ class Program
     {
         using (IKernel kernel = new StandardKernel())
         {
-			var microServiceFactory = kernel.Get<IMicroServiceFactory>();
+            var microServiceFactory = kernel.Get<IMicroServiceFactory>();
             var microService = microServiceFactory.Create();
 
             microService.Run(args);
