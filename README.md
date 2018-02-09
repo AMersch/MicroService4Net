@@ -25,8 +25,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        var microService = new MicroServiceNinject();
-        microService.Run(args);
+        using (IKernel kernel = new StandardKernel())
+        {
+			var microServiceFactory = kernel.Get<IMicroServiceFactory>();
+            var microService = microServiceFactory.Create();
+
+            microService.Run(args);
+        }
     }
 }
 ```
